@@ -1,8 +1,6 @@
-
-
 from collections import defaultdict
 
-from laminate.categorize import CategorizedEntry
+from categorize import CategorizedEntry
 
 # Keep a Changelog's standard category order
 CATEGORY_ORDER = ["Added", "Changed", "Fixed", "Removed"]
@@ -43,8 +41,8 @@ def write_changelog(content: str, output_path: str = "changelog.md") -> None:
 
 # testing purposes only
 if __name__ == "__main__":
-    from laminate.gitlog import get_commits
-    from laminate.categorize import categorize_commits
+    from gitlog import get_commits
+    from categorize import categorize_commits
 
     commits = get_commits()[:10]
 

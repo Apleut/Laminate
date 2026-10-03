@@ -21,14 +21,13 @@ Instead of manually sorting hundreds of commits into `Added`, `Changed`, `Fixed`
 
 ## Features
 
-* 🤖 **Local LLM processing** — your Git history stays on your machine
-* 📝 **Release-ready Markdown** — generates structured changelogs
-* 🗂️ **Automatic categorization** — sorts changes into standard changelog categories
-* 🧩 **Related-commit grouping** — combines related commits into a single entry
-* 📦 **Batch processing** — process large repositories without sending the entire history to the model at once
-* 🔒 **No API keys required** — Laminate uses a local GGUF model through `llama-cpp-python`
-* 🛠️ **Git-aware filtering** — filter commits by date or Git commit range
-* 🚀 **Release support** — generate either an `[Unreleased]` section or a versioned release
+* **Local LLM processing** — your Git history stays on your machine
+* **Release-ready Markdown** — generates structured changelogs
+* **Automatic categorization** — sorts changes into standard changelog categories
+* **Related-commit grouping** — combines related commits into a single entry
+* **No API keys required** — Laminate uses a local GGUF model through `llama-cpp-python`
+* **Git-aware filtering** — filter commits by date or Git commit range
+* **Release support** — generate either an `[Unreleased]` section or a versioned release
 
 ## Installation
 
@@ -40,7 +39,8 @@ Install Laminate with pip:
 pip install laminate-cli
 ```
 
-> **Note:** The PyPI package is named `laminate-cli`, while the command and Python package are named `laminate`.
+> [!NOTE]
+> The PyPI package is named `laminate-cli`, while the command and Python package are named `laminate`.
 
 ### From source
 

@@ -1,4 +1,10 @@
-# Laminate
+<div style="text-align: center;">
+    <img src="assets/laminate-logo.svg" alt="Laminate Logo" width=200>
+    <h1>Laminate</h1>
+    <h4><a href="https://apleut.dev">My Website</a> - <a href="changelog.md">Changelog</a></h4>
+    <hr></hr>
+</div>
+
 > [!NOTE]
 > Laminate is in **extremely early development.** Everything stated here is subject to change. If you want to contribute to Laminate, contact me via email at __me@apleut.dev__.
 

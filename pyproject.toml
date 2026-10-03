@@ -1,8 +1,10 @@
 [project]
-name = "laminate"
+name = "laminate-cli"
 version = "0.1.0"
-description = "Generate release-ready changelogs from git log using a local LLM"
+description = "Generate release-ready changelogs from git history using a local LLM"
+readme = "README.md"
 requires-python = ">=3.10"
+
 dependencies = [
     "llama-cpp-python",
     "pydantic",

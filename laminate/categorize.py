@@ -1,9 +1,9 @@
 import json
-from typing import Literal
+from typing import Callable, Literal
 from pydantic import BaseModel
 
-from gitlog import Commit
-from llm import generate
+from .gitlog import Commit
+from .llm import generate
 
 Category = Literal["Added", "Changed", "Fixed", "Removed"]
 
@@ -118,6 +118,7 @@ def _categorize_batch(commits: list[Commit]) -> list[CategorizedEntry]:
 def categorize_commits(
     commits: list[Commit],
     batch_size: int = DEFAULT_BATCH_SIZE,
+    on_progress: Callable[[int, int, int], None] | None = None,
 ) -> list[CategorizedEntry]:
     if not commits:
         return []
@@ -126,14 +127,16 @@ def categorize_commits(
     batches = _chunk(commits, batch_size)
 
     for i, batch in enumerate(batches):
-        print(f"[categorize] processing batch {i + 1}/{len(batches)} ({len(batch)} commits)...")
+        if on_progress:
+            on_progress(i + 1, len(batches), len(batch))
+
         all_entries.extend(_categorize_batch(batch))
 
     return all_entries
 
 # testing purposes only
 if __name__ == "__main__":
-    from gitlog import get_commits
+    from .gitlog import get_commits
 
     commits = get_commits()[:5]
     if not commits:

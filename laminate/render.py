@@ -1,12 +1,25 @@
 from collections import defaultdict
+from datetime import date
 
-from categorize import CategorizedEntry
+from .categorize import CategorizedEntry
 
-# Keep a Changelog's standard category order
 CATEGORY_ORDER = ["Added", "Changed", "Fixed", "Removed"]
 
 
-def render_changelog(entries: list[CategorizedEntry]) -> str:
+def render_changelog(entries: list[CategorizedEntry], version: str | None = None) -> str:
+    """
+    Renders categorized entries into Keep a Changelog formatted
+    markdown.
+
+    version: if given, the header becomes "## [version] - today's date"
+        (for cutting an actual release). If omitted, defaults to the
+        standard "## [Unreleased]" header.
+    """
+    if version:
+        header = f"## [{version}] - {date.today().isoformat()}"
+    else:
+        header = "## [Unreleased]"
+
     lines = [
         "# Changelog",
         "",
@@ -15,7 +28,7 @@ def render_changelog(entries: list[CategorizedEntry]) -> str:
         "The format is based on Keep a Changelog, and this project "
         "adheres to Semantic Versioning.",
         "",
-        "## [Unreleased]",
+        header,
         "",
     ]
 
@@ -38,11 +51,11 @@ def write_changelog(content: str, output_path: str = "changelog.md") -> None:
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(content)
 
-
 # testing purposes only
 if __name__ == "__main__":
-    from gitlog import get_commits
-    from categorize import categorize_commits
+    
+    from .gitlog import get_commits
+    from .categorize import categorize_commits
 
     commits = get_commits()[:10]
 

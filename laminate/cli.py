@@ -3,6 +3,8 @@ import typer
 from concurrent.futures import ThreadPoolExecutor
 
 from rich.console import Console
+from rich.live import Live
+from rich.spinner import Spinner
 
 from .gitlog import get_commits, GitLogError
 from .categorize import categorize_commits
@@ -49,20 +51,25 @@ def generate(
     status = None
 
     try:
-        with console.status(
-            "Categorizing commits with the local model...",
-            spinner="dots",
-        ) as status:
-            with ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(
-                    categorize_commits,
-                    commits,
-                    batch_size=batch_size,
-                    on_progress=lambda current, total, count: status.update(
-                        f"Categorizing commits... batch {current}/{total} ({count} commits)"
-                    ),
-                )
-                entries = future.result()
+        spinner = Spinner(
+            "dots",
+            text="Categorizing commits with the local model...",
+        )
+
+        def progress(current, total, count):
+            spinner.update(
+                text=f"Categorizing commits... batch {current}/{total} ({count} commits)"
+            )
+
+        with Live(spinner, refresh_per_second=10):
+            entries = categorize_commits(
+                commits,
+                batch_size=batch_size,
+                on_progress=progress,
+            )
+
+        console.print(f"✓ Categorized {len(commits)} commits.")
+
     except LLMError as e:
         typer.echo(
             f"Error loading or running the local model: {e}",

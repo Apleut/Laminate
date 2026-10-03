@@ -3,7 +3,7 @@ from datetime import date
 
 from .categorize import CategorizedEntry
 
-CATEGORY_ORDER = ["Added", "Changed", "Fixed", "Removed"]
+CATEGORY_ORDER = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
 
 
 def render_changelog(entries: list[CategorizedEntry], version: str | None = None) -> str:
@@ -25,8 +25,8 @@ def render_changelog(entries: list[CategorizedEntry], version: str | None = None
         "",
         "All notable changes to this project will be documented in this file.",
         "",
-        "The format is based on Keep a Changelog, and this project "
-        "adheres to Semantic Versioning.",
+        "The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), "
+        "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).",
         "",
         header,
         "",
@@ -47,7 +47,7 @@ def render_changelog(entries: list[CategorizedEntry], version: str | None = None
     return "\n".join(lines).rstrip() + "\n"
 
 
-def write_changelog(content: str, output_path: str = "changelog.md") -> None:
+def write_changelog(content: str, output_path: str = "CHANGELOG.md") -> None:
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(content)
 

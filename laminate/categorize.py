@@ -5,16 +5,16 @@ from pydantic import BaseModel
 from .gitlog import Commit
 from .llm import generate
 
-Category = Literal["Added", "Changed", "Fixed", "Removed"]
+Category = Literal["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
 
 DEFAULT_BATCH_SIZE = 15
 
 SYSTEM_PROMPT = """You are a precise changelog generator. You will be \
 given a numbered list of raw git commit subjects. For each one, in the \
 same order, produce:
-- "category": exactly one of "Added", "Changed", "Fixed", or "Removed"
+- "category": exactly one of "Added", "Changed", "Depcrecated", "Removed", "Fixed" or "Security"
 - "description": a short, human-readable rewrite of the commit, written \
-for someone reading a changelog (not a git log) - no ticket numbers, \
+for someone (such as an end user) reading a changelog (not a git log) - no ticket numbers, \
 no "fix:"/"feat:" prefixes, plain sentence case.
 
 Respond with ONLY a JSON array, one object per commit, in the same \
@@ -94,7 +94,7 @@ def _categorize_batch(commits: list[Commit]) -> list[CategorizedEntry]:
         category = item.get("category")
         description = item.get("description")
 
-        if category not in ("Added", "Changed", "Fixed", "Removed") or not description:
+        if category not in ("Added", "Changed", "Deprecated", "Removed", "Fixed", "Security") or not description:
             entries.append(
                 CategorizedEntry(
                     category="Changed",

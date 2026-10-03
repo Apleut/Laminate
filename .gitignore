@@ -8,6 +8,7 @@ bin-release/
 venv/
 .settings/
 *.env
+laminate.egg-info/
 
 # Models (only used for testing)
 models/*

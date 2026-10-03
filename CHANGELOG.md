@@ -7,28 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.0] - 2026-10-03
 
 ### Added
-- Added Deprecated and Security categories, corrected the category order, and changed the changelog filename to adhere to Keep a Changelog conventions.
-- Implemented full CLI pipeline in cli.py.
-- Created `__init__.py` for the package.
-- Added package installation instructions to gitignore.
-- Included the rich library in the project dependencies.
-- Added the laminate logo and updated the README with Laminate branding.
-- Created categorize.py for organizing commits.
-- Added a note about installing dependencies in the README file.
-- Created llm.py for description functionality.
-- Added new project files and dependencies including llama-cpp-python and typer.
-- Added commit grouping to prevent needless changelog entries.
-- Generated this changelog using Laminate!
+- Added new configuration file for publishing, created python-publish.yml, and integrated full CLI pipeline.
+- Added Laminate branding to README and logo.
+- Added dependencies and scripts for Laminate project structure.
 
 ### Changed
-- Removed an unnecessary variable from cli.py and corrected the default output value.
-- Updated cli.py to use a more efficient interface.
-- Changed the `--batch_size` flag to `--batch-size`
-
-### Removed
-- Removed the original changelog file used for testing purposes.
-- Excluded models folder from git tracking.
+- Updated .gitignore, pyproject.toml, and renamed --batch_size to --batch-size.
+- changelog update
+- added commit grouping
+- changed cli.py to use a better interface
+- added package installation to gitignore
+- added models folder contents to gitignore
 
 ### Fixed
-- Resolved import errors caused by changes in folder structure.
-- Fixed import errors resulting from folder restructuring
+- Removed unused variable from cli.py and corrected default output value.

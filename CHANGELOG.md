@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Added Deprecated and Security categories, corrected the category order, and changed the changelog filename to adhere to Keep a Changelog conventions.
 - Implemented full CLI pipeline in cli.py.
-- Created __init__.py for the package.
+- Created `__init__.py` for the package.
 - Added package installation instructions to gitignore.
 - Included the rich library in the project dependencies.
 - Added the laminate logo and updated the README with Laminate branding.
@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Removed an unnecessary variable from cli.py and corrected the default output value.
 - Updated cli.py to use a more efficient interface.
+- Changed the `--batch_size` flag to `--batch-size`
 
 ### Removed
 - Removed the original changelog file used for testing purposes.

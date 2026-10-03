@@ -89,7 +89,7 @@ def get_commits(
 
     return commits
 
-
+# testing purposes only
 if __name__ == "__main__":
     commits = get_commits()
     print(f"Found {len(commits)} commits:\n")

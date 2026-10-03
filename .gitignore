@@ -5,7 +5,12 @@ bin-release/
 [Bb]in/
 
 # Other files and folders
+venv/
 .settings/
+*.env
+
+# Python cache folder
+__pycache__/
 
 # Executables
 *.swf

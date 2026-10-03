@@ -2,6 +2,8 @@ import typer
 
 from concurrent.futures import ThreadPoolExecutor
 
+import sys
+
 from rich.console import Console
 from rich.live import Live
 from rich.spinner import Spinner
@@ -60,11 +62,14 @@ def generate(
             )
 
         with Live(spinner, refresh_per_second=10):
-            entries = categorize_commits(
-                commits,
-                batch_size=batch_size,
-                on_progress=progress,
-            )
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(
+                    categorize_commits,
+                    commits,
+                    batch_size=batch_size,
+                    on_progress=progress,
+                )
+                entries = future.result()
 
         console.print(f"✓ Categorized {len(commits)} commits.")
 
@@ -78,7 +83,8 @@ def generate(
     changelog = render_changelog(entries, version=release)
     write_changelog(changelog, output)
 
-    typer.echo(f"\nDone. Changelog written to {output}")
+    typer.echo(f"\nDone. Changelog written to {output}", file=sys.stdout)
+
 
 
 if __name__ == "__main__":

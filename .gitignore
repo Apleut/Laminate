@@ -9,6 +9,9 @@ venv/
 .settings/
 *.env
 
+# Models (only used for testing)
+models/*
+
 # Python cache folder
 __pycache__/
 

@@ -24,7 +24,7 @@ def generate(
     until: str = typer.Option(None, help="Only include commits before this date, e.g. 2026-01-01."),
     commit_range: str = typer.Option(None, "--range", help="A git commit range, e.g. v1.0.0..v1.1.0. Overrides --since/--until."),
     output: str = typer.Option("CHANGELOG.md", help="Path to write the generated changelog to."),
-    batch_size: int = typer.Option(15, help="Number of commits sent to the LLM per batch."),
+    batch_size: int = typer.Option(15, "--batch-size", help="Number of commits sent to the LLM per batch."),
     release: str = typer.Option(None, "--release", help="Version number for this release, e.g. 1.1.0. If omitted, the changelog is headed [Unreleased]."),
 ):
     if repo != ".":

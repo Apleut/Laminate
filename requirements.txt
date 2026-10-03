@@ -1,3 +1,4 @@
 pydantic
 llama-cpp-python
 typer
+rich

@@ -4,8 +4,10 @@
 <h1>Laminate</h1>
 
 <h4>
-    <a href="https://apleut.dev">My Website</a> ·
-    <a href="CHANGELOG.md">Changelog</a>
+    <a href="https://apleut.dev">My Website</a> · 
+    <a href="https://github.com/Apleut/Laminate">GitHub</a> · 
+    <a href="https://github.com/Apleut/Laminate/blob/main/CHANGELOG.md">Changelog</a> · 
+    <a href="https://github.com/Apleut/Laminate/blob/main/LICENSE">License</a>
 </h4>
 
 <hr>

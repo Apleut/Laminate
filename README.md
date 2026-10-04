@@ -73,7 +73,7 @@ pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-c
 Then install Laminate:
 
 ```bash
-pip install .
+pip install laminate-cli
 ```
 
 ## Model

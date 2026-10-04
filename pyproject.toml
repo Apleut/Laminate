@@ -1,9 +1,21 @@
 [project]
 name = "laminate-cli"
-version = "0.1.1"
+version = "0.1.2"
+authors = [
+  { name="Apleut", email="me@apleut.dev" },
+]
 description = "Generate release-ready changelogs from git history using a local LLM"
 readme = "README.md"
 requires-python = ">=3.10"
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Software Development :: Version Control :: Git",
+]
 
 dependencies = [
     "llama-cpp-python",
@@ -11,6 +23,16 @@ dependencies = [
     "typer",
     "rich",
 ]
+
+license = "MIT"
+license-files = [
+    "LICENSE",
+]
+
+[project.urls]
+Homepage = "https://apleut.dev"
+Repository = "https://github.com/Apleut/Laminate"
+Changelog = "https://github.com/Apleut/Laminate/blob/main/CHANGELOG.md"
 
 [project.scripts]
 laminate = "laminate.cli:app"

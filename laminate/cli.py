@@ -1,6 +1,7 @@
 import typer
 
 from concurrent.futures import ThreadPoolExecutor
+from importlib.metadata import version as get_version, PackageNotFoundError
 
 import sys
 
@@ -17,6 +18,17 @@ app = typer.Typer(add_completion=False)
 console = Console()
 
 
+def _version_callback(value: bool):
+    if not value:
+        return
+    try:
+        v = get_version("laminate-cli")
+    except PackageNotFoundError:
+        v = "unknown (not installed as a package)"
+    typer.echo(f"laminate {v}")
+    raise typer.Exit()
+
+
 @app.command()
 def generate(
     repo: str = typer.Option(".", help="Path to the git repository."),
@@ -26,6 +38,13 @@ def generate(
     output: str = typer.Option("CHANGELOG.md", help="Path to write the generated changelog to."),
     batch_size: int = typer.Option(15, "--batch-size", help="Number of commits sent to the LLM per batch."),
     release: str = typer.Option(None, "--release", help="Version number for this release, e.g. 1.1.0. If omitted, the changelog is headed [Unreleased]."),
+    version: bool = typer.Option(
+        False,
+        "--version",
+        callback=_version_callback,
+        is_eager=True,
+        help="Show Laminate's version and exit.",
+    ),
 ):
     if repo != ".":
         typer.echo(f"Reading commits from '{repo}'...")

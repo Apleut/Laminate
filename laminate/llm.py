@@ -1,9 +1,13 @@
 from pathlib import Path
 from llama_cpp import Llama
+from platformdirs import user_data_dir
 
-MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
+_CANDIDATE_DIRS = [
+    Path.cwd() / "models",
+    Path(user_data_dir("Laminate", "Apleut")) / "models",
+]
 
-DEFAULT_N_CTX = 4096  
+DEFAULT_N_CTX = 4096
 _llm: Llama | None = None
 
 
@@ -12,29 +16,33 @@ class LLMError(Exception):
 
 
 def _find_model_file() -> Path:
-    if not MODELS_DIR.exists():
-        raise LLMError(
-            f"Models folder not found at {MODELS_DIR}. Create it and "
-            "place a .gguf model file inside (see README for a "
-            "recommended model and download link)."
-        )
+    checked = []
 
-    gguf_files = list(MODELS_DIR.glob("*.gguf"))
+    for candidate_dir in _CANDIDATE_DIRS:
+        checked.append(str(candidate_dir))
 
-    if not gguf_files:
-        raise LLMError(
-            f"No .gguf model file found in {MODELS_DIR}. Download a "
-            "compatible model (see README) and place it in that folder."
-        )
+        if not candidate_dir.exists():
+            continue
 
-    if len(gguf_files) > 1:
-        names = ", ".join(f.name for f in gguf_files)
-        raise LLMError(
-            f"Multiple .gguf files found in {MODELS_DIR} ({names}) - "
-            "keep only one so Laminate knows which to load."
-        )
+        gguf_files = list(candidate_dir.glob("*.gguf"))
 
-    return gguf_files[0]
+        if len(gguf_files) == 1:
+            return gguf_files[0]
+
+        if len(gguf_files) > 1:
+            names = ", ".join(f.name for f in gguf_files)
+            raise LLMError(
+                f"Multiple .gguf files found in {candidate_dir} ({names}) - "
+                "keep only one so Laminate knows which to load."
+            )
+
+    checked_str = "\n  - ".join(checked)
+    raise LLMError(
+        "No .gguf model file found. Laminate checked:\n  - "
+        f"{checked_str}\n"
+        "Download a compatible model (see README) and place it in one "
+        "of those folders (create the folder if it doesn't exist)."
+    )
 
 
 def get_llm(n_ctx: int = DEFAULT_N_CTX) -> Llama:

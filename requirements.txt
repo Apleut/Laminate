@@ -2,3 +2,4 @@ pydantic
 llama-cpp-python
 typer
 rich
+platformdirs

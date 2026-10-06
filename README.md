@@ -80,18 +80,28 @@ pip install laminate-cli
 
 Laminate runs a **local GGUF model** using [`llama-cpp-python`](https://github.com/abetlen/llama-cpp-python).
 
-Place exactly one `.gguf` model file in:
-
-```text
-models/
-└── your-model.gguf
-```
-
 [Phi-4-mini-instruct](https://huggingface.co/unsloth/Phi-4-mini-instruct-GGUF) is a good pick, and is the model used for Laminate's development.
 
-Laminate automatically finds and loads the model when it runs.
+Laminate looks for exactly one `.gguf` file in two places, in this order:
 
-If the `models/` directory does not exist, or contains zero or multiple `.gguf` files, Laminate will stop and explain what needs to be fixed.
+1. **A `models/` folder in your current directory**, which the recommended location if you're running Laminate from a cloned repo:
+
+   ```text
+   models/
+   └── your-model.gguf
+   ```
+
+2. **Your OS's standard application data folder**, under `Laminate/models/`, used automatically if no local `models/` folder is found. This is the normal location if you installed via `pip install laminate-cli`:
+
+   | OS | Location |
+   |---|---|
+   | Windows | `%LOCALAPPDATA%\Apleut\Laminate\models\` |
+   | macOS | `~/Library/Application Support/Laminate/models/` |
+   | Linux | `~/.local/share/Laminate/models/` |
+
+Create the folder if it doesn't already exist, and place your `.gguf` file inside.
+
+If Laminate can't find a model, or finds more than one `.gguf` file in whichever folder it checks, it will stop and tell you exactly which locations it looked in and what to fix.
 
 The model is intentionally kept separate from the package because GGUF models can be large and have different licensing requirements.
 

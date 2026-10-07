@@ -84,7 +84,7 @@ Laminate runs a **local GGUF model** using [`llama-cpp-python`](https://github.c
 
 Laminate looks for exactly one `.gguf` file in two places, in this order:
 
-1. **A `models/` folder in your current directory**, which the recommended location if you're running Laminate from a cloned repo:
+1. **A `models/` folder in your current directory**, which is the recommended location if you're running Laminate from a cloned repo:
 
    ```text
    models/
@@ -113,11 +113,7 @@ From inside a Git repository:
 laminate
 ```
 
-Laminate will read the repository's commit history, categorize the changes, and write the result to:
-
-```text
-CHANGELOG.md
-```
+Laminate will read the repository's commit history, categorize the changes, and write the result to `CHANGELOG.md`
 
 For example:
 
@@ -166,6 +162,9 @@ Process a specific Git commit range.
 ```bash
 laminate --range v1.0.0..v1.1.0
 ```
+
+> [!IMPORTANT]
+> Laminate does not currently support range formats like `v1.0.0..HEAD`. Version-to-present functionality will be added in a future release.
 
 `--range` overrides `--since` and `--until`.
 
@@ -294,7 +293,3 @@ If you find a problem with Laminate, please open an issue with:
 Or email me at [me@apleut.dev](me@apleut.dev).
 
 For changes to Laminate itself, pull requests are welcome.
-
-## License
-
-License information will be added before the first stable release.

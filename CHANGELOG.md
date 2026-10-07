@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] – 2026-10-07
+
+### Changed
+- Fixed some minor grammatical errors in README and added a note about the `--range` option.
+
 ## [0.1.4] - 2026-10-05
 
 ### Added
@@ -25,7 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added GitHub, License, and a proper changelog link to README.
 
 ### Changed
-- Updated identifying info in pyproject.toml and changed version to 0.1.2.
 - Changed license from GPL to MIT license.
 
 ## [0.1.1] - 2026-10-03
@@ -42,11 +46,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - Updated .gitignore, pyproject.toml, and renamed --batch_size to --batch-size.
-- changelog update.
-- added commit grouping.
-- changed cli.py to use a better interface.
-- added package installation to gitignore.
-- added models folder contents to gitignore.
+- Added commit grouping.
+- Changed cli.py to use a better interface.
+- Added package installation to gitignore.
+- Added models folder contents to gitignore.
 
 ### Fixed
 - Removed unused variable from cli.py and corrected default output value.

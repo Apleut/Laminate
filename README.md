@@ -155,6 +155,9 @@ Only include commits before a specific date.
 laminate --until 2026-10-01
 ```
 
+> [!IMPORTANT]
+> Both `--since` and `--until` use YYYY-MM-DD format for dates.
+
 ### `--range`
 
 Process a specific Git commit range.
@@ -163,8 +166,11 @@ Process a specific Git commit range.
 laminate --range v1.0.0..v1.1.0
 ```
 
-> [!IMPORTANT]
-> Laminate does not currently support range formats like `v1.0.0..HEAD`. Version-to-present functionality will be added in a future release.
+You can also use `--range` to read commits from a specific version to the last commit, like this:
+
+```bash
+laminate --range v1.0.0..HEAD
+```
 
 `--range` overrides `--since` and `--until`.
 

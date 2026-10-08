@@ -220,6 +220,10 @@ Without `--release`, Laminate generates:
 ## [Unreleased]
 ```
 
+### `--append`
+
+Append the new changelog contents to the output file instead of completely overwriting them. Without `--append`, the changelog will only contain the commit range you specified. If you include `--append` though, it will simply add that release to the top of the file.
+
 ## Example
 
 Suppose your repository contains commits like:

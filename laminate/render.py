@@ -47,7 +47,14 @@ def render_changelog(entries: list[CategorizedEntry], version: str | None = None
     return "\n".join(lines).rstrip() + "\n"
 
 
-def write_changelog(content: str, output_path: str = "CHANGELOG.md") -> None:
+def write_changelog(content: str, output_path: str = "CHANGELOG.md", append: bool | None = None) -> None:
+    if append is True:
+        with open(output_path, "r", encoding="utf-8") as f:
+            existing_content = f.read()
+        existing_stub = existing_content[existing_content.find('## [') + 1:]
+
+    content = content + "\n" + existing_stub
+
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(content)
 
@@ -67,5 +74,5 @@ if __name__ == "__main__":
         changelog = render_changelog(entries)
 
         print(changelog)
-        write_changelog(changelog)
+        write_changelog(changelog, append=True)
         print("Wrote changelog.md")

@@ -38,6 +38,7 @@ def generate(
     output: str = typer.Option("CHANGELOG.md", help="Path to write the generated changelog to."),
     batch_size: int = typer.Option(15, "--batch-size", help="Number of commits sent to the LLM per batch."),
     release: str = typer.Option(None, "--release", help="Version number for this release, e.g. 1.1.0. If omitted, the changelog is headed [Unreleased]."),
+    append: bool = typer.Option(False, "--append", help="Appends the new changelog contents to the existing file instead of overwriting it."),
     version: bool = typer.Option(
         False,
         "--version",
@@ -100,7 +101,7 @@ def generate(
         raise typer.Exit(code=1)
 
     changelog = render_changelog(entries, version=release)
-    write_changelog(changelog, output)
+    write_changelog(changelog, output, append)
 
     typer.echo(f"\nDone. Changelog written to {output}", file=sys.stdout)
 

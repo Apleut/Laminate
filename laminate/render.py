@@ -52,6 +52,8 @@ def write_changelog(content: str, output_path: str = "CHANGELOG.md", append: boo
         with open(output_path, "r", encoding="utf-8") as f:
             existing_content = f.read()
         existing_stub = existing_content[existing_content.find('## [') + 1:]
+    else:
+        existing_stub = ""
 
     content = content + "\n" + existing_stub
 
